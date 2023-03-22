@@ -1,0 +1,47 @@
+/*~~~~~~~~~~~~~~~GENERAL~~~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    height: 100vh;
+}
+
+/*~~~~~~~~~~~~~~~SCENE~~~~~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#scene{
+    max-height: 100vh;
+    margin: auto;
+    position: relative;
+    display: block;
+}
+
+/*~~~~~~~~~~~~~~~CLOSE BTN~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#close{
+    width : 25px;
+    position: absolute;
+    z-index: 10;
+    top:2rem;
+    right:2rem;
+    visibility: hidden;
+    color : black;
+}
+
+/*~~~~~~~~~~~~~~~~~CLUES~~~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.clues{
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+}
