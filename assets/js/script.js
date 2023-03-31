@@ -129,6 +129,9 @@ function lose(){
 
 
 window.onload = function() {
+    show('#briefing-zoom');
+    clueShowed = true;
+    closeBtn();
 
     onClickClue('#mud', '#mud-clue');
     onClickClue('#wine1', '#wine1-clue');
