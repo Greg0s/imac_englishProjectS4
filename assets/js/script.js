@@ -1,4 +1,5 @@
 var clueShowed = false;
+var uiShowed = false;
 var isFullscreen = false;
 
 function show(selector){
@@ -42,23 +43,28 @@ function fullscreen(){
     }else{
         closeFullscreen();
     }
-
 }
 
 function closeBtn(){
-    if(clueShowed){
+    if(clueShowed || uiShowed){
         show('#close');
         document.querySelector('#close').onclick = function (){
-            hide('.clues');
+            if(clueShowed){
+                hide('.clues');
+                clueShowed = false;
+            }
+            if(uiShowed){
+                hide('.ui');
+                uiShowed = false;
+            }
             hide('#close');
-            clueShowed = false;
         }
     }
 }
 
-function onClickElement(clickElement, showElement){
+function onClickClue(clickElement, showElement){
     document.querySelector(clickElement).onclick = function (){
-        if(!clueShowed){
+        if(!clueShowed && !uiShowed){
             show(showElement);
             clueShowed = true;
             closeBtn();
@@ -66,22 +72,77 @@ function onClickElement(clickElement, showElement){
     }
 }
 
+function checkAnswer(suspect){
+    if(suspect == "#alexandra"){
+        win();
+    }else{
+        lose();
+    }
+}
+
+function confirm(suspect){
+    hide('#suspects-zoom');
+    show('#confirm');
+    uiShowed = true;
+    document.querySelector('#yes').onclick = function(){
+        hide('#confirm');
+        checkAnswer(suspect);
+    }
+    document.querySelector('#no').onclick = function(){
+        hide('#confirm');
+        show('#suspects-zoom');
+    }
+}
+
+function selectSuspect(suspect){
+    document.querySelector(suspect).onclick = function (){
+        confirm(suspect);
+    }
+}
+
+function onClickSuspects(){
+    document.querySelector("#suspects").onclick = function (){ 
+        if(!clueShowed && !uiShowed){
+            show("#suspects-zoom");
+            clueShowed = true;
+            closeBtn();
+
+            selectSuspect("#anne");
+            selectSuspect("#charlotte");
+            selectSuspect('#alexandra');
+            selectSuspect("#edward");
+            selectSuspect("#eleanor");
+            selectSuspect("#caroline");
+        }
+    }
+}
+
+function win(){
+    show('#win');
+    closeBtn();
+}
+
+function lose(){
+    show('#lose');
+    closeBtn();
+}
+
+
 window.onload = function() {
 
-    //onClickElement('#drawer-d', '#diary');
-    onClickElement('#mud', '#mud-clue');
-    onClickElement('#wine1', '#wine1-clue');
-    onClickElement('#wine2', '#wine2-clue');
-    onClickElement('#hair', '#hair-clue');
-    onClickElement('#drawer-l-t', '#hair-clue');
-    onClickElement('#drawer-l-b', '#hair-clue');
-    onClickElement('#drawer-r', '#diary-clue');
-    onClickElement('#horsehair', '#hair-clue');
-    onClickElement('#portrait', '#portrait-clue');
-    onClickElement('#vase', '#vase-clue');
-    onClickElement('#books', '#books-clue');
-    onClickElement('#library', '#library-clue');
-    onClickElement('#horsehair', '#horsehair-clue');
+    onClickClue('#mud', '#mud-clue');
+    onClickClue('#wine1', '#wine1-clue');
+    onClickClue('#wine2', '#wine2-clue');
+    onClickClue('#hair', '#hair-clue');
+    onClickClue('#drawer-l-t', '#hair-clue');
+    onClickClue('#drawer-l-b', '#letters-clue');
+    onClickClue('#drawer-r', '#diary-clue');
+    onClickClue('#horsehair', '#horsehair-clue');
+    onClickClue('#portrait', '#portrait-clue');
+    onClickClue('#vase', '#vase-clue');
+    onClickClue('#books', '#books-clue');
+    onClickClue('#library', '#library-clue');
+    onClickClue('#briefing', '#briefing-zoom');
 
-    //console.log(clueShowed);
-  };
+    onClickSuspects();
+};
