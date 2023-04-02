@@ -137,7 +137,7 @@ window.onload = function() {
     onClickClue('#wine1', '#wine1-clue');
     onClickClue('#wine2', '#wine2-clue');
     onClickClue('#hair', '#hair-clue');
-    onClickClue('#drawer-l-t', '#hair-clue');
+    onClickClue('#drawer-l-t', '#photo-clue');
     onClickClue('#drawer-l-b', '#letters-clue');
     onClickClue('#drawer-r', '#diary-clue');
     onClickClue('#horsehair', '#horsehair-clue');
